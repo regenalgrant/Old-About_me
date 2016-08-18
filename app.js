@@ -1,7 +1,7 @@
 var errorCount = 0;
 var correctAnswers = 0;
 
-var countErrors = function(errors) { }
+var countErrors = function(errors) {
   if (errors === 1) {
     alert('You failed to enter Y/N or yes/no as an answer - please do so for future questions.');
   } else if (errors === 2) {
@@ -27,10 +27,10 @@ console.log('Guest\'s name: ', userName);
 
 var buttQuestions = ['Would you like to play?, ' + userName + '?'];
 
-gameQuestions.push('So, ' + userName + ', do you think it\'s true that Regenal\'s loves women Butt?');
-gameQuestions.push('Regenal Likes this song from Sir Mixalot?');
-gameQuestions.push('How about a simpler one, ' + userName + '. Would you guess Regenal Ass size?');
-gameQuestions.push('Alright, here\'s one without a correct answer. Do you think Regenal is got Big Butt?');
+buttQuestions.push('So, ' + userName + ', do you think it\'s true that Regenal\'s loves women Butt?');
+buttQuestions.push('Regenal Likes this song from Sir Mixalot?');
+buttQuestions.push('How about a simpler one, ' + userName + '. Would you guess Regenal Ass size?');
+buttQuestions.push('Alright, here\'s one without a correct answer. Do you think Regenal is got Big Butt?');
 
 var yesAnswers = ['As a matter of fact, you must playing the other team, to be precise.'];
 yesAnswers.push('Yep - There are 2 types of Asses type.');
@@ -47,36 +47,40 @@ noAnswers.push('Aww. Well, hopefully he\'ll change your mind, ' + userName + '.'
 var buttAnswers = [];
 var possibleAnswers = ['y', 'yes', 'n', 'no'];
 
-for (var i = 0; i < gameQuestions.length; i++) {
-  buttAnswers[i] = prompt(buttAnswersQuestions[i]);
-  if (buttAnswers[i] === null || buttAnswers[i] === '') {
-    buttAnswers[i] = 'blah';
-  }
-  var noMatch = 0;
-  for (var j = 0; j < possibleAnswers.length; j++) {
-    if (buttAnswers[i].toLowerCase() === possibleAnswers[j]) {
-      if (buttAnswers[i].toLowerCase() === possibleAnswers[0] || buttAnswers[i].toLowerCase() === possibleAnswers[1]) {
-        alert(yesAnswers[i]);
-        correctAnswers++;
-      } else if (buttAnswers[i].toLowerCase() === possibleAnswers[2] || buttAnswers[i].toLowerCase() === possibleAnswers[3]) {
-        alert(noAnswers[i]);
-      }
-      console.log('Guest\'s answer to question #', i + 1, ': ', gameAnswers[i]);
-    } else {
-      noMatch++;
+function fiveQuestions() {
+  for (var i = 0; i < buttQuestions.length; i++) {
+    buttAnswers[i] = prompt(buttAnswersQuestions[i]);
+    if (buttAnswers[i] === null || buttAnswers[i] === '') {
+      buttAnswers[i] = 'blah';
     }
-  }
-  if (noMatch === 4) {
-    errorCount++;
-    countErrors(errorCount);
-    if (errorCount === 5) {
+    var noMatch = 0;
+    for (var j = 0; j < possibleAnswers.length; j++) {
+      if (buttAnswers[i].toLowerCase() === possibleAnswers[j]) {
+        if (buttAnswers[i].toLowerCase() === possibleAnswers[0] || buttAnswers[i].toLowerCase() === possibleAnswers[1]) {
+          alert(yesAnswers[i]);
+          correctAnswers++;
+        } else if (buttAnswers[i].toLowerCase() === possibleAnswers[2] || buttAnswers[i].toLowerCase() === possibleAnswers[3]) {
+          alert(noAnswers[i]);
+        }
+        console.log('Guest\'s answer to question #', i + 1, ': ', gameAnswers[i]);
+      } else {
+        noMatch++;
+      }
+    }
+    if (noMatch === 4) {
+      errorCount++;
+      countErrors(errorCount);
+      if (errorCount === 5) {
 
-      i = gameQuestions.length;
-    } else {
-      i--;
+        i = buttQuestions.length;
+      } else {
+        i--;
+      }
     }
   }
 }
+
+fiveQuestions();
 
 console.log('The user currently has ', correctAnswers, ' correct answers');
 
@@ -85,21 +89,25 @@ var randomNumber = Math.floor(Math.random() * 20);
 var numGuesses = 0;
 console.log('The random number is ', randomNumber);
 
-alert('Let\'s switch gears here. Time to guess this girls ass size 1 and 20. You get 2 guesses!');
-while (userGuess !== randomNumber) {
-  userGuess = prompt('OK - make a guess!');
-  if (userGuess < randomNumber) {
-    alert('Too little - go higher!');
-  } else if (userGuess > randomNumber) {
-    alert('Too big - drop it lke its hot!');
-  } else {
-    alert('Congratulations! You\'re correct! The Ass size was ' + randomNumber + '.');
-    userGuess = randomNumber;
-    correctAnswers++;
-  }
-  numGuesses++;
-  if (numGuesses >= 2 && userGuess !== randomNumber) {
-    alert('No more guesses. The correct Ass size was ' + randomNumber + '.');
-    userGuess = randomNumber;
+function wrapOne() {
+  alert('Let\'s switch gears here. Time to guess this girls ass size 1 and 20. You get 2 guesses!');
+  while (userGuess !== randomNumber) {
+    userGuess = prompt('OK - make a guess!');
+    if (userGuess < randomNumber) {
+      alert('Too little - go higher!');
+    } else if (userGuess > randomNumber) {
+      alert('Too big - drop it lke its hot!');
+    } else {
+      alert('Congratulations! You\'re correct! The Ass size was ' + randomNumber + '.');
+      userGuess = randomNumber;
+      correctAnswers++;
+    }
+    numGuesses++;
+    if (numGuesses >= 2 && userGuess !== randomNumber) {
+      alert('No more guesses. The correct Ass size was ' + randomNumber + '.');
+      userGuess = randomNumber;
+    }
   }
 }
+
+wrapOne();
