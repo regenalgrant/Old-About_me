@@ -1,7 +1,7 @@
 var errorCount = 0;
 var correctAnswers = 0;
 
-var countErrors = function(errors) { }
+var countErrors = function(errors) {
   if (errors === 1) {
     alert('You failed to enter Y/N or yes/no as an answer - please do so for future questions.');
   } else if (errors === 2) {
@@ -47,36 +47,40 @@ noAnswers.push('Aww. Well, hopefully he\'ll change your mind, ' + userName + '.'
 var buttAnswers = [];
 var possibleAnswers = ['y', 'yes', 'n', 'no'];
 
-for (var i = 0; i < gameQuestions.length; i++) {
-  buttAnswers[i] = prompt(buttAnswersQuestions[i]);
-  if (buttAnswers[i] === null || buttAnswers[i] === '') {
-    buttAnswers[i] = 'blah';
-  }
-  var noMatch = 0;
-  for (var j = 0; j < possibleAnswers.length; j++) {
-    if (buttAnswers[i].toLowerCase() === possibleAnswers[j]) {
-      if (buttAnswers[i].toLowerCase() === possibleAnswers[0] || buttAnswers[i].toLowerCase() === possibleAnswers[1]) {
-        alert(yesAnswers[i]);
-        correctAnswers++;
-      } else if (buttAnswers[i].toLowerCase() === possibleAnswers[2] || buttAnswers[i].toLowerCase() === possibleAnswers[3]) {
-        alert(noAnswers[i]);
-      }
-      console.log('Guest\'s answer to question #', i + 1, ': ', gameAnswers[i]);
-    } else {
-      noMatch++;
+function fiveQuestions() {
+  for (var i = 0; i < gameQuestions.length; i++) {
+    buttAnswers[i] = prompt(buttAnswersQuestions[i]);
+    if (buttAnswers[i] === null || buttAnswers[i] === '') {
+      buttAnswers[i] = 'blah';
     }
-  }
-  if (noMatch === 4) {
-    errorCount++;
-    countErrors(errorCount);
-    if (errorCount === 5) {
+    var noMatch = 0;
+    for (var j = 0; j < possibleAnswers.length; j++) {
+      if (buttAnswers[i].toLowerCase() === possibleAnswers[j]) {
+        if (buttAnswers[i].toLowerCase() === possibleAnswers[0] || buttAnswers[i].toLowerCase() === possibleAnswers[1]) {
+          alert(yesAnswers[i]);
+          correctAnswers++;
+        } else if (buttAnswers[i].toLowerCase() === possibleAnswers[2] || buttAnswers[i].toLowerCase() === possibleAnswers[3]) {
+          alert(noAnswers[i]);
+        }
+        console.log('Guest\'s answer to question #', i + 1, ': ', gameAnswers[i]);
+      } else {
+        noMatch++;
+      }
+    }
+    if (noMatch === 4) {
+      errorCount++;
+      countErrors(errorCount);
+      if (errorCount === 5) {
 
-      i = gameQuestions.length;
-    } else {
-      i--;
+        i = gameQuestions.length;
+      } else {
+        i--;
+      }
     }
   }
 }
+
+fiveQuestions();
 
 console.log('The user currently has ', correctAnswers, ' correct answers');
 
